@@ -33,8 +33,9 @@ shinyUI(fluidPage(
                         
                     tabPanel("Overview",h4(p("How to use this App")),
                              
-                       p("To use this app you need a document (e.g., newspaper article etc.) in txt file format.\n\n 
+                       p("To use this app you need a document in txt file format or the CR name from GSM.\n\n 
                        To upload the article text, click on Browse in left-sidebar panel and upload the txt file from your local machine. \n\n
+                       You can also input the JIRA stories to provide the ones which needs summarization
                        Once the file is uploaded, the shinyapp will compute a text summary in the back-end with default inputs and accordingly results will be displayed in various tabs.", align = "justify")),
         
             
