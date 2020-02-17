@@ -69,7 +69,7 @@ shinyServer(function(input, output) {
         
     })
     
-    output$output2 <-  renderText({ 
+    output$output1 <-  renderText({ 
         "You have selected this"
     })
         
