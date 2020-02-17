@@ -69,9 +69,48 @@ shinyServer(function(input, output) {
         
     })
     
-    output$output1 <-  renderText({ 
-        "You have selected this"
-    })
+        output$output2 <- renderPlot({  
         
+        ## word-tokenize too. for IDing keywords
+        article_words = article_sentences() %>%
+            unnest_tokens(word, sentence) %>%
+            # drop stopwords
+            anti_join(stop_words, by = "word")
+        
+        article_summary <- textrank_sentences(data = article_sentences(), 
+                                              terminology = article_words) 
+        
+        #        output$output1 <- renderTable({ output1() })
+        
+        # top k sentences ka plot
+        #        output2 <- reactive({
+        
+        #        output$output2 <- renderText({ 
+        paste("You have selected", input$var)
+    })
+    
+    
+    output$output2 <- renderPlot({  
+        
+        ## word-tokenize too. for IDing keywords
+        article_words = article_sentences() %>%
+            unnest_tokens(word, sentence) %>%
+            # drop stopwords
+            anti_join(stop_words, by = "word")
+        
+        article_summary <- textrank_sentences(data = article_sentences(), 
+                                              terminology = article_words) 
+        
+        #        output$output1 <- renderTable({ output1() })
+        
+        # top k sentences ka plot
+        #        output2 <- reactive({
+        
+        #        output$output2 <- renderText({ 
+        paste("You have selected", input$var)
+    })
+    
+    
+   
     
 }) # shinyServer func ends
