@@ -69,40 +69,9 @@ shinyServer(function(input, output) {
         
     })
     
-    output$output2 <- renderPlot({  
-            
-        ## word-tokenize too. for IDing keywords
-        article_words = article_sentences() %>%
-            unnest_tokens(word, sentence) %>%
-            # drop stopwords
-            anti_join(stop_words, by = "word")
-        
-        article_summary <- textrank_sentences(data = article_sentences(), 
-                                              terminology = article_words) 
-    
-#        output$output1 <- renderTable({ output1() })
-            
-        # top k sentences ka plot
-#        output2 <- reactive({
-        
-#        output$output2 <- renderPlot({            
-            
-            article_summary[["sentences"]] %>%
-            
-            ggplot(aes(textrank_id, textrank, fill = textrank_id)) +
-            
-            geom_col() +
-            theme_minimal() +
-            scale_fill_viridis_c() +
-            guides(fill = "none") +
-            
-            labs(x = "Sentence",
-                 y = "TextRank score",
-                 title = "Where do the most informative sentences appear in the article")
-        
-        })
-        
-
+    output$output2 <-  renderText({ 
+        "You have selected this"
+    })
         
     
 }) # shinyServer func ends
