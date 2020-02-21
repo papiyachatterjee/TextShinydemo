@@ -49,7 +49,7 @@ shinyUI(fluidPage(
             
                     tabPanel("Sentence_scores Plot",
                              h4(p("Plotting TextRank scores for each sentence")),
-                             plotOutput("output2"))
+                             textOutput("output2"))
             
                     )  # tabSetPanel closes
         
