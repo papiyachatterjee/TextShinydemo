@@ -70,13 +70,10 @@ shinyServer(function(input, output) {
     })
     
        
-    
-    output$output2 <-  output$output2 <- renderText({ 
-        paste("You have selected")  
-        
+       output$output2 <- renderText({ 
+        paste("You have selected")          
         
     })
-    
    
     
 }) # shinyServer func ends
