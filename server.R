@@ -86,8 +86,11 @@ mycorpus=tm_map(mycorpus,function(x) removeWords(x,"x"))
 #make a document term matrix now
 dtm=as.matrix(DocumentTermMatrix(mycorpus))
                 
-                
-   article_summary <- textrank_sentences(data = article_sentences(), 
+           article_words = article_sentences %>%
+            unnest_tokens(word, sentence) %>%
+            # drop stopwords
+            anti_join(stop_words, by = "word")             
+   article_summary <- textrank_sentences(data = article_sentences, 
                                               terminology = article_words)
 
 myvector=c(article_summary)
