@@ -72,6 +72,9 @@ shinyServer(function(input, output) {
     
     #-------------------------------------
     library("tm")
+    require(dplyr)
+    require(magrittr)
+    require(tidytext)
 
 myvector=c(article_sentences)
 #making corpus of two documents
