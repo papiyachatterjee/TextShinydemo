@@ -113,8 +113,7 @@ mycorpus=tm_map(mycorpus,function(x) removeWords(x,"x"))
 #make a document term matrix now
 dtm2=as.matrix(DocumentTermMatrix(mycorpus))
 require("textreuse")     
-similarity <-2L
-similarity = float32(jaccard_similarity(dtm, dtm2))
+similarity = as.numeric(jaccard_similarity(dtm, dtm2))
            
  return(similarity)               
 #paste(similarity)          
