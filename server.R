@@ -87,7 +87,7 @@ mycorpus=tm_map(mycorpus,function(x) removeWords(x,"x"))
 dtm=as.matrix(DocumentTermMatrix(mycorpus))
                 
                 
-             summ_sents = article_sentences[["sentences"]] %>%
+             summ_sents = article_sentences %>%
             arrange(desc(textrank)) %>% 
             slice(1:input$num) %>%  # dplyr::slice() chooses rows by their ordinal position in the tbl
             pull(sentence) %>% tibble()
