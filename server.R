@@ -73,7 +73,7 @@ shinyServer(function(input, output) {
     #-------------------------------------
     
        
-       output$output2 <- renderPrint({ 
+       output$output2 <- renderText({ 
           library("tm")
     require(dplyr)
     require(magrittr)
@@ -116,7 +116,7 @@ require("textreuse")
 similarity = 0.0                
 #similarity = (jaccard_similarity(dtm, dtm2))
            
-return(similarity format = "0.00")               
+return(similarity)               
 #paste("0.6")          
         
     })
