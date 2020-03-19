@@ -103,10 +103,7 @@ article_summary <- textrank_sentences(data = article_sentences(),
     require(tidytext)
     require(textreuse)         
                 
-    summ_sents = article_summary %>% slice(1:5) %>%  # dplyr::slice() chooses rows by their ordinal position in the tbl
-            pull(sentence) %>% tibble()               
-   
-summ_sents <- c(summary_sentences())
+ summ_sents = article_summary[1:5]
 myvector=c(summ_sents)
 #making corpus of two documents
 mycorpus= Corpus(VectorSource(myvector))
