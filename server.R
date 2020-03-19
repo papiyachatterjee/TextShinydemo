@@ -73,7 +73,7 @@ shinyServer(function(input, output) {
     #-------------------------------------
     
        
-       output$output2 <- renderText({ 
+       output$output2 <- renderPrint({ 
           library("tm")
     require(dplyr)
     require(magrittr)
