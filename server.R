@@ -98,8 +98,7 @@ article_summary <- textrank_sentences(data = article_sentences(),
                                               terminology = article_words)  
                 
                 
-    summ_sents = article_summary %>% arrange(desc(textrank)) %>% 
-            slice(1:5) %>%  # dplyr::slice() chooses rows by their ordinal position in the tbl
+    summ_sents = article_summary %>% slice(1:5) %>%  # dplyr::slice() chooses rows by their ordinal position in the tbl
             pull(sentence) %>% tibble()               
    
 summ_sents <- c(summary_sentences())
