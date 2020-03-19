@@ -79,10 +79,8 @@ shinyServer(function(input, output) {
     
     library("corpus")
 
-d1 = readLines("hpsm.txt")
-d2 = readLines("summary.txt")
 
-myvector=c(d1)
+myvector=c(article_sentences)
 #making corpus of two documents
 mycorpus= Corpus(VectorSource(myvector))
 #preprocessing of corpus
@@ -95,7 +93,7 @@ mycorpus=tm_map(mycorpus,function(x) removeWords(x,"x"))
 #make a document term matrix now
 dtm=as.matrix(DocumentTermMatrix(mycorpus))
 
-myvector=c(d2)
+myvector=c(summ_sents)
 #making corpus of two documents
 mycorpus= Corpus(VectorSource(myvector))
 #preprocessing of corpus
