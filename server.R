@@ -97,10 +97,15 @@ dtm=as.matrix(DocumentTermMatrix(mycorpus))
             unnest_tokens(word, sentence) %>%
             # drop stopwords
             anti_join(stop_words, by = "word")             
-   article_summary <- textrank_sentences(data = article_sentences(), 
+          article_summary <- textrank_sentences(data = article_sentences(), 
                                               terminology = article_words)
+                
+            summ_sents = article_summary %>%
+            arrange(desc(textrank)) %>% 
+            slice(1:input$num) %>%  # dplyr::slice() chooses rows by their ordinal position in the tbl
+            pull(sentence) %>% tibble()
 
-myvector=c(article_summary)
+myvector=c(summ_sents)
 #making corpus of two documents
 mycorpus= Corpus(VectorSource(myvector))
 #preprocessing of corpus
