@@ -61,7 +61,7 @@ shinyServer(function(input, output) {
 #        a1 = order(a0$textrank, decreasing=TRUE)
 #        summ_sents = a0$sentence[a1[1:input$num]] # %>% tibble()
         
-        summ_sents = article_summary[["sentences"]] %>%
+        summ_sents = article_summary %>%
             arrange(desc(textrank)) %>% 
             slice(1:input$num) %>%  # dplyr::slice() chooses rows by their ordinal position in the tbl
             pull(sentence) %>% tibble()
