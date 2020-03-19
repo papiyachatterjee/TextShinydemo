@@ -26,13 +26,11 @@ shinyServer(function(input, output) {
     #num_sents <- reactive({ if (is.null(input$num)) {return(5)} })
     #num_sents <- input$num
     
-        require(dplyr)
-        require(magrittr)
-        require(tidytext)
-        
+      
     ## load data into tibble
     article_sentences <- reactive({
-            
+        
+                 
             article_sentences = tibble(text = dataset()) %>%
             unnest_tokens(sentence, text, token = "sentences", to_lower=FALSE) %>%    # sentence-tokenizing the article   
             mutate(sentence_id = row_number()) %>%    # insert setence_id
@@ -46,13 +44,14 @@ shinyServer(function(input, output) {
     
     #papiya papiya papiya
     
-      require(dplyr)
-    require(magrittr)
-    require(tidytext)
-    require(textreuse)
+
     
     ## word-tokenize too. for IDing keywords
     summary_sentences <- reactive({
+              require(dplyr)
+    require(magrittr)
+    require(tidytext)
+    require(textreuse)
        article_words = dataset %>%
             unnest_tokens(word, sentence) %>%
             # drop stopwords
