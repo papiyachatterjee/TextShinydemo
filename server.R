@@ -71,7 +71,10 @@ shinyServer(function(input, output) {
     
     
     #-------------------------------------
-    library("tm")
+    
+       
+       output$output2 <- renderText({ 
+          library("tm")
     require(dplyr)
     require(magrittr)
     require(tidytext)
@@ -108,10 +111,9 @@ mycorpus=tm_map(mycorpus,function(x) removeWords(x,stopwords("english")))
 mycorpus=tm_map(mycorpus,function(x) removeWords(x,"x"))
 #make a document term matrix now
 dtm2=as.matrix(DocumentTermMatrix(mycorpus))
-similarity = jaccard_similarity(dtm, dtm2)
-       
-       output$output2 <- renderText({ 
-        paste(similarity)          
+similarity = jaccard_similarity(dtm, dtm2) 
+           
+ paste(similarity)          
         
     })
    
