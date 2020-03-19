@@ -43,6 +43,33 @@ shinyServer(function(input, output) {
     
     output$article_sentences <- renderTable({ article_sentences() })
     
+    
+    #papiya papiya papiya
+    
+    ## word-tokenize too. for IDing keywords
+    summary_sentences <- reactive({
+        article_words = dataset %>%
+            unnest_tokens(word, sentence) %>%
+            # drop stopwords
+            anti_join(stop_words, by = "word")
+    
+        ## print summary
+        article_summary <- textrank_sentences(data = dataset, 
+                                              terminology = article_words)
+            
+#        a0 = data.frame(article_summary$sentences)
+#        a1 = order(a0$textrank, decreasing=TRUE)
+#        summ_sents = a0$sentence[a1[1:input$num]] # %>% tibble()
+        
+        summ_sents = article_summary[["sentences"]] %>%
+            arrange(desc(textrank)) %>% 
+            slice(1:input$num) %>%  # dplyr::slice() chooses rows by their ordinal position in the tbl
+            pull(sentence) %>% tibble()
+        
+        return(summ_sents)
+    
+    })
+    #papiya papiya
 
     output$output1 <- renderTable({
         
