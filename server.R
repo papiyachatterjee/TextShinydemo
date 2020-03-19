@@ -126,7 +126,7 @@ article_words = article_sentences() %>%
             anti_join(stop_words, by = "word")             
 article_summary <- textrank_sentences(data = article_sentences(), 
                                               terminology = article_words)         
-
+summ_sents <- summary_sentences()
 myvector=c(summ_sents)
 #making corpus of two documents
 mycorpus= Corpus(VectorSource(myvector))
