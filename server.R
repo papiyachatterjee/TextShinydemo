@@ -93,7 +93,7 @@ mycorpus=tm_map(mycorpus,function(x) removeWords(x,"x"))
 #make a document term matrix now
 dtm=as.matrix(DocumentTermMatrix(mycorpus))
 
-myvector=c(summ_sents)
+myvector=c(output$output1)
 #making corpus of two documents
 mycorpus= Corpus(VectorSource(myvector))
 #preprocessing of corpus
