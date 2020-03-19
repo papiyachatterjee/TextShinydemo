@@ -73,7 +73,7 @@ shinyServer(function(input, output) {
     #-------------------------------------
     
        
-       output$output2 <- renderPrint({ 
+       output$output2 <- renderText({ 
           library("tm")
     require(dplyr)
     require(magrittr)
@@ -113,9 +113,9 @@ mycorpus=tm_map(mycorpus,function(x) removeWords(x,"x"))
 #make a document term matrix now
 dtm2=as.matrix(DocumentTermMatrix(mycorpus))
 require("textreuse") 
-similarity = 0.0                
-#similarity = (jaccard_similarity(dtm, dtm2))
-           
+               
+sim = (jaccard_similarity(dtm, dtm2))
+similarity = as.character(sim)           
 return(similarity)               
 #paste("0.6")          
         
