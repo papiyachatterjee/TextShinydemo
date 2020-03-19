@@ -69,9 +69,50 @@ shinyServer(function(input, output) {
         
     })
     
+    
+    #-------------------------------------
+    library(text2vec)
+    library(tokenizers)
+    library(quanteda)
+    library('clusteval')
+    library("tm")
+    
+    library("corpus")
+
+d1 = readLines("hpsm.txt")
+d2 = readLines("summary.txt")
+
+myvector=c(d1)
+#making corpus of two documents
+mycorpus= Corpus(VectorSource(myvector))
+#preprocessing of corpus
+mycorpus=tm_map(mycorpus,removePunctuation)
+mycorpus=tm_map(mycorpus,removeNumbers)
+mycorpus=tm_map(mycorpus,stripWhitespace)
+mycorpus=tm_map(mycorpus,tolower)
+mycorpus=tm_map(mycorpus,function(x) removeWords(x,stopwords("english")))
+mycorpus=tm_map(mycorpus,function(x) removeWords(x,"x"))
+#make a document term matrix now
+dtm=as.matrix(DocumentTermMatrix(mycorpus))
+
+myvector=c(d2)
+#making corpus of two documents
+mycorpus= Corpus(VectorSource(myvector))
+#preprocessing of corpus
+mycorpus=tm_map(mycorpus,removePunctuation)
+mycorpus=tm_map(mycorpus,removeNumbers)
+mycorpus=tm_map(mycorpus,stripWhitespace)
+mycorpus=tm_map(mycorpus,tolower)
+mycorpus=tm_map(mycorpus,function(x) removeWords(x,stopwords("english")))
+mycorpus=tm_map(mycorpus,function(x) removeWords(x,"x"))
+#make a document term matrix now
+dtm2=as.matrix(DocumentTermMatrix(mycorpus))
+library("textreuse")
+
+similarity = jaccard_similarity(dtm, dtm2)
        
        output$output2 <- renderText({ 
-        paste("You have selected")          
+        paste(similarity)          
         
     })
    
