@@ -85,8 +85,14 @@ mycorpus=tm_map(mycorpus,function(x) removeWords(x,stopwords("english")))
 mycorpus=tm_map(mycorpus,function(x) removeWords(x,"x"))
 #make a document term matrix now
 dtm=as.matrix(DocumentTermMatrix(mycorpus))
+                
+                
+             summ_sents = article_sentences[["sentences"]] %>%
+            arrange(desc(textrank)) %>% 
+            slice(1:input$num) %>%  # dplyr::slice() chooses rows by their ordinal position in the tbl
+            pull(sentence) %>% tibble()
 
-myvector=c(output$output1)
+myvector=c(summ_sents)
 #making corpus of two documents
 mycorpus= Corpus(VectorSource(myvector))
 #preprocessing of corpus
