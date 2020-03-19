@@ -28,8 +28,7 @@ shinyServer(function(input, output) {
     
       
     ## load data into tibble
-    article_sentences <- reactive({
-        
+    article_sentences <- reactive({      
                  
             article_sentences = tibble(text = dataset()) %>%
             unnest_tokens(sentence, text, token = "sentences", to_lower=FALSE) %>%    # sentence-tokenizing the article   
@@ -42,38 +41,7 @@ shinyServer(function(input, output) {
     output$article_sentences <- renderTable({ article_sentences() })
     
     
-    #papiya papiya papiya
     
-
-    
-    ## word-tokenize too. for IDing keywords
-    summary_sentences <- reactive({
-              require(dplyr)
-    require(magrittr)
-    require(tidytext)
-    require(textreuse)
-       article_words = dataset %>%
-            unnest_tokens(word, sentence) %>%
-            # drop stopwords
-            anti_join(stop_words, by = "word")
-    
-        ## print summary
-        article_summary <- textrank_sentences(data = dataset)
-                                              
-            
-#        a0 = data.frame(article_summary$sentences)
-#        a1 = order(a0$textrank, decreasing=TRUE)
-#        summ_sents = a0$sentence[a1[1:input$num]] # %>% tibble()
-        
-        summ_sents = article_summary %>% arrange(desc(textrank)) %>% 
-            slice(1:input$num) %>%  # dplyr::slice() chooses rows by their ordinal position in the tbl
-            pull(sentence) %>% tibble()
-        
-        return(summ_sents)
-    
-    })
-    #papiya papiya
-
     output$output1 <- renderTable({
         
         ## word-tokenize too. for IDing keywords
@@ -123,6 +91,16 @@ mycorpus=tm_map(mycorpus,function(x) removeWords(x,"x"))
 #make a document term matrix now
 dtm=as.matrix(DocumentTermMatrix(mycorpus))
                 
+                article_words = article_sentences() %>% unnest_tokens(word, sentence) %>%
+            # drop stopwords
+            anti_join(stop_words, by = "word")             
+article_summary <- textrank_sentences(data = article_sentences(), 
+                                              terminology = article_words)  
+                
+                
+    summ_sents = article_summary %>% arrange(desc(textrank)) %>% 
+            slice(1:5) %>%  # dplyr::slice() chooses rows by their ordinal position in the tbl
+            pull(sentence) %>% tibble()               
    
 summ_sents <- c(summary_sentences())
 myvector=c(summ_sents)
