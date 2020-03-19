@@ -71,14 +71,7 @@ shinyServer(function(input, output) {
     
     
     #-------------------------------------
-    library(text2vec)
-    library(tokenizers)
-    library(quanteda)
-    library('clusteval')
     library("tm")
-    
-    library("corpus")
-
 
 myvector=c(article_sentences)
 #making corpus of two documents
@@ -105,8 +98,6 @@ mycorpus=tm_map(mycorpus,function(x) removeWords(x,stopwords("english")))
 mycorpus=tm_map(mycorpus,function(x) removeWords(x,"x"))
 #make a document term matrix now
 dtm2=as.matrix(DocumentTermMatrix(mycorpus))
-library("textreuse")
-
 similarity = jaccard_similarity(dtm, dtm2)
        
        output$output2 <- renderText({ 
