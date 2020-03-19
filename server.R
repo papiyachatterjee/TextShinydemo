@@ -121,7 +121,7 @@ mycorpus=tm_map(mycorpus,function(x) removeWords(x,"x"))
 dtm=as.matrix(DocumentTermMatrix(mycorpus))
                 
    
-summ_sents <- summary_sentences()
+summ_sents <- c(summary_sentences())
 myvector=c(summ_sents)
 #making corpus of two documents
 mycorpus= Corpus(VectorSource(myvector))
