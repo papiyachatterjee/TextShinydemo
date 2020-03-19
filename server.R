@@ -72,7 +72,7 @@ shinyServer(function(input, output) {
     
        
        output$output2 <- renderText({ 
-          library("tm")
+     library("tm")
     require(dplyr)
     require(magrittr)
     require(tidytext)
@@ -96,7 +96,12 @@ dtm=as.matrix(DocumentTermMatrix(mycorpus))
             anti_join(stop_words, by = "word")             
 article_summary <- textrank_sentences(data = article_sentences(), 
                                               terminology = article_words)  
+     
                 
+    require(dplyr)
+    require(magrittr)
+    require(tidytext)
+    require(textreuse)         
                 
     summ_sents = article_summary %>% slice(1:5) %>%  # dplyr::slice() chooses rows by their ordinal position in the tbl
             pull(sentence) %>% tibble()               
