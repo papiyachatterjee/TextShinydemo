@@ -48,14 +48,14 @@ shinyServer(function(input, output) {
     
     ## word-tokenize too. for IDing keywords
     summary_sentences <- reactive({
-        article_words = dataset %>%
-            unnest_tokens(word, sentence) %>%
-            # drop stopwords
-            anti_join(stop_words, by = "word")
+  #      article_words = dataset %>%
+  #          unnest_tokens(word, sentence) %>%
+  #          # drop stopwords
+  #          anti_join(stop_words, by = "word")
     
         ## print summary
-        article_summary <- textrank_sentences(data = dataset, 
-                                              terminology = article_words)
+        article_summary <- textrank_sentences(data = dataset)
+                                              
             
 #        a0 = data.frame(article_summary$sentences)
 #        a1 = order(a0$textrank, decreasing=TRUE)
